@@ -34,3 +34,12 @@ assert_cmd_exists() {
     exit 1
   fi
 }
+
+# $1 - directory path
+assert_dir_exists() {
+  assert_arg_count 1 $#
+  if [[ ! -d "$1" ]]; then
+    echo "Error: $1 is not a directory" >&2
+    exit 1
+  fi
+}

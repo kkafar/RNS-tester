@@ -2,8 +2,28 @@
 
 source ${RNST_ROOT_DIR}/scripts/util.sh
 
-assert_arg_count 1 $#
+declare -i VERBOSE=1
 
-cd ${RNST_ROOT_DIR}/$1
+while getopts ":v" option; do
+  case $option in
+    v) # verbose mode
+      VERBOSE=0
+      echo "Running in verbose mode"
+      ;;
+    esac
+done
 
+shift $((OPTIND-1))
+
+project_dir="${RNST_ROOT_DIR}/$1"
+
+[ ${VERBOSE} -eq 0 ] && echo "project dir: ${project_dir}"
+
+assert_dir_exists ${project_dir}
+
+cd ${project_dir}
+
+[ ${VERBOSE} -eq 0 ] && echo "removing node_modules, android/build/, android/app/build/, ios/Pods, ios/build"
 rm -fr node_modules android/build android/app/build ios/Pods ios/build
+
+cd ${RNST_ROOT_DIR}
