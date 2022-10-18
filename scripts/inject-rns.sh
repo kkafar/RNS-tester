@@ -3,6 +3,15 @@
 source ${RNST_ROOT_DIR}/scripts/util.sh
 source ${RNST_ROOT_DIR}/scripts/log4bash.sh
 
+usage() {
+  echo "Inject react-native-screens library into test projects."
+  echo "Available options:"
+  echo "h   print this help message and exit"
+  echo "v   activate verbose mode (recommended)"
+  echo "i   run yarn install in project directory before injecting the react-native-screens library"
+  echo "g   install react-native-screens directly from GitHub" 
+}
+
 declare -i VERBOSE=1
 declare -r RNS_REPO_PATH=${RNS_PATH}
 declare -i RUN_YARN=1
@@ -12,18 +21,12 @@ declare -i INSTALL_FROM_GITHUB=1
 # because we use this prefix to name projects and then recognize them by it.
 declare -r PACKAGE_NAME="react-native-screens.tgz"
 
-if [[ -z ${RNS_REPO_PATH} ]]; then
-  log_error "failed to read RNS_PATH env var"
-  exit 1
-fi
 
-if [[ ! -d ${RNS_REPO_PATH} ]]; then
-  log_error "${RNS_REPO_PATH} is not a directory"
-  exit 1
-fi
-
-while getopts ":vi" option; do
+while getopts ":vihg" option; do
   case $option in
+    h) # print help message
+      usage
+      ;;
     v) # verbose mode
       VERBOSE=0
       log_info "Running in verbose mode"
@@ -41,6 +44,16 @@ while getopts ":vi" option; do
 done
 
 shift $((OPTIND-1))
+
+if [[ -z ${RNS_REPO_PATH} ]]; then
+  log_error "failed to read RNS_PATH env var"
+  exit 1
+fi
+
+if [[ ! -d ${RNS_REPO_PATH} ]]; then
+  log_error "${RNS_REPO_PATH} is not a directory"
+  exit 1
+fi
 
 package_file=$(find . -maxdepth 1 -iname "${PACKAGE_NAME}")
 
