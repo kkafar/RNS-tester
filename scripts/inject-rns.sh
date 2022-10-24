@@ -12,7 +12,7 @@ usage() {
   echo "g   install react-native-screens directly from GitHub" 
 }
 
-declare -i VERBOSE=1
+declare -i VERBOSE=0
 declare -r RNS_REPO_PATH=${RNS_PATH}
 declare -i RUN_YARN=1
 declare -i INSTALL_FROM_GITHUB=1
@@ -108,7 +108,7 @@ for project in ${projects}; do
   fi
 
   [ ${VERBOSE} -eq 0 ] && log_info "Injecting react-native-screens"
-  rm -fr "package" "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens" 
+  rm -fr "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens" 
   cp -R "package" "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens"
 done
 
