@@ -108,6 +108,7 @@ for project in ${projects}; do
   fi
 
   [ ${VERBOSE} -eq 0 ] && log_info "Injecting react-native-screens"
+  rm -fr "package" "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens" 
   cp -R "package" "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens"
 done
 
