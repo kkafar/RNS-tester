@@ -1,6 +1,7 @@
 #! /bin/bash
 
 source ${RNST_ROOT_DIR}/scripts/util.sh
+source ${RNST_ROOT_DIR}/scripts/log4bash.sh
 
 __ret_val__=''
 
@@ -11,15 +12,18 @@ create_rns_app() {
 
   cd ${RNST_ROOT_DIR}
 
+  log_info "Creating RN app $1 with version $2"
   npx react-native init "$1" --version "$2"
 
   cd "${RNST_ROOT_DIR}/$1"
 
+  log_info "Installing deps..."
   yarn add react-native-screens
   yarn add react-native-safe-area-context
   yarn add @react-navigation/native-stack
   yarn add @react-navigation/native
 
+  log_info "Copying template App.js from ${RNST_ROOT_DIR}/scripts/App.template.js"
   cp "${RNST_ROOT_DIR}/scripts/App.template.js" "${RNST_ROOT_DIR}/$1/App.js"
   
   cd ${RNST_ROOT_DIR}
