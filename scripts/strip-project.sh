@@ -1,8 +1,9 @@
 #! /bin/bash
 
 source ${RNST_ROOT_DIR}/scripts/util.sh
+source ${RNST_ROOT_DIR}/log4bash.sh
 
-declare -i VERBOSE=1
+declare -i VERBOSE=0
 
 while getopts ":v" option; do
   case $option in
@@ -17,13 +18,13 @@ shift $((OPTIND-1))
 
 project_dir="${RNST_ROOT_DIR}/$1"
 
-[ ${VERBOSE} -eq 0 ] && echo "project dir: ${project_dir}"
+[ ${VERBOSE} -eq 0 ] && log_info "Stripping project ${project_dir}"
 
 assert_dir_exists ${project_dir}
 
 cd ${project_dir}
 
-[ ${VERBOSE} -eq 0 ] && echo "removing node_modules, android/build/, android/app/build/, ios/Pods, ios/build"
+[ ${VERBOSE} -eq 0 ] && log_info "removing node_modules, android/build/, android/app/build/, ios/Pods, ios/build"
 rm -fr node_modules android/build android/app/build ios/Pods ios/build
 
 cd ${RNST_ROOT_DIR}
