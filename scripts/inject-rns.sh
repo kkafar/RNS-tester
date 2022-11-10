@@ -26,6 +26,7 @@ while getopts ":vihg" option; do
   case $option in
     h) # print help message
       usage
+      exit 0
       ;;
     v) # verbose mode
       VERBOSE=0
