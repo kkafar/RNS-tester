@@ -13,7 +13,7 @@ create_rns_app() {
   cd ${RNST_ROOT_DIR}
 
   log_info "Creating RN app $1 with version $2"
-  npx react-native init "$1" --version "$2"
+  npx react-native@latest init "$1" --version "$2"
 
   cd "${RNST_ROOT_DIR}/$1"
 
