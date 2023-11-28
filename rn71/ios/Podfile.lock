@@ -356,9 +356,9 @@ PODS:
     - React-jsi (= 0.71.2)
     - React-logger (= 0.71.2)
     - React-perflogger (= 0.71.2)
-  - RNScreens (3.18.2):
+  - RNScreens (3.27.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-    - React-RCTImage
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -494,7 +494,7 @@ SPEC CHECKSUMS:
   RCTTypeSafety: 3063e5a1e5b1dc2cbeda5c8f8926c0ad1a6b0871
   React: 0a1a36e8e81cfaac244ed88b97f23ab56e5434f0
   React-callinvoker: 679a09fbfe1a8bbf0c8588b588bf3ef85e7e4922
-  React-Codegen: 78f8966839f22b54d3303a6aca2679bce5723c3f
+  React-Codegen: 6fbcd4da431939f8eb043ec01b6c9df6269aca04
   React-Core: 679e5ff1eb0e3122463976d0b2049bebcb7b33d6
   React-CoreModules: 06cbf15185e6daf9fb3aec02c963f4807bd794b3
   React-cxxreact: 645dc75c9deba4c15698b1b5902236d6a766461f
@@ -517,9 +517,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: 0af3babdeee1b2d052811a2f86977d1e1c81ebd1
   React-runtimeexecutor: 4bf9a9086d27f74065fce1dddac274aa95216952
   ReactCommon: 2228b5d854dfa2b7569955decfdc52303ed61a7e
-  RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
+  RNScreens: 3c2d122f5e08c192e254c510b212306da97d2581
   Yoga: 5b0304b3dbef2b52e078052138e23a19c7dacaef
 
 PODFILE CHECKSUM: 8c9a294648030b80775ef491b5bcd305633df35e
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.13.0

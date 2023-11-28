@@ -8,6 +8,7 @@ usage() {
   echo "Available options:"
   echo "h   print this help message and exit"
   echo "v   activate verbose mode (recommended)"
+  echo "p   name of the project to inject library into"
   echo "i   run yarn install in project directory before injecting the react-native-screens library"
   echo "g   install react-native-screens directly from GitHub" 
 }
@@ -21,8 +22,9 @@ declare -i INSTALL_FROM_GITHUB=1
 # because we use this prefix to name projects and then recognize them by it.
 declare -r PACKAGE_NAME="react-native-screens.tgz"
 
+project_name=""
 
-while getopts ":vihg" option; do
+while getopts ":vihgp:" option; do
   case $option in
     h) # print help message
       usage
@@ -41,6 +43,8 @@ while getopts ":vihg" option; do
       log_info "react-native-screens will be installed directly from GitHub."
       # TODO
       ;;
+    p)
+      project_name=${OPTARG}
     esac
 done
 
@@ -99,7 +103,12 @@ package_file=${PACKAGE_NAME}
 [ ${VERBOSE} -eq 0 ] && log_info "Unpacking"
 tar zxf ${PACKAGE_NAME}
 
-projects=$(ls | grep -E "rn.*")
+if [[ -z "$project_name" ]]; then
+  projects=$(ls | grep -E "rn.*")
+else
+  projects="$project_name"
+fi
+
 for project in ${projects}; do
   [ ${VERBOSE} -eq 0 ] && log_info "Processing ${project}"
 
@@ -112,7 +121,5 @@ for project in ${projects}; do
   rm -fr "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens" 
   cp -R "package" "${RNST_ROOT_DIR}/${project}/node_modules/react-native-screens"
 done
-
-
 
 cd ${RNST_ROOT_DIR}
