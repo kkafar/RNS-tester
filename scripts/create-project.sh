@@ -37,3 +37,4 @@ assert_cmd_exists "yarn"
 assert_arg_count 2 $#
 
 create_rns_app $1 $2
+
